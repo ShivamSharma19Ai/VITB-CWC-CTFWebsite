@@ -1,5 +1,5 @@
 from os import close
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import mysql.connector
 from flask_sqlalchemy import SQLAlchemy
 
@@ -18,11 +18,6 @@ class Register_db(db.Model):
     registration_no = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=True)
-
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -45,11 +40,18 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/login_validation', methods=['POST', 'GET'])
-def login_validation():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    return "The email is {} and the password is{}".format(email, password)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if (request.method == 'POST'):
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = Register_db.query.filter_by(email=email).first()
+        if user:
+            if user.password == password:
+                return render_template('home.html')
+    else:
+        return render_template('login.html')
+    return render_template('login.html')
 
 
 if __name__ == "__main__":

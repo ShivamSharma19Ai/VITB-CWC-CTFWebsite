@@ -37,7 +37,22 @@ def register():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('Index.html')
+
+
+@app.route('/scoreboard')
+def scoreboard():
+    return render_template('scoreboard.html')
+
+
+@app.route('/challenge')
+def challenge():
+    return render_template('challenge.html')
+
+
+@app.route('/challenge/1')
+def challenge1():
+    return render_template('challenge1.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -48,7 +63,7 @@ def login():
         user = Register_db.query.filter_by(email=email).first()
         if user:
             if user.password == password:
-                return render_template('home.html')
+                return render_template('Index.html')
     else:
         return render_template('login.html')
     return render_template('login.html')

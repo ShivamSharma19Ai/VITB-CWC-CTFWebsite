@@ -18,6 +18,15 @@ class Register_db(db.Model):
     registration_no = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=True)
+class Comments(db.Model):
+
+    '''
+    id,name registration no email password
+    '''
+    sno = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    comments = db.Column(db.String(50), nullable=False)
+    
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -50,8 +59,19 @@ def challenge():
     return render_template('challenge.html')
 
 
-@app.route('/challenge/1')
+@app.route('/challenge/1', methods=['GET','POST'])
 def challenge1():
+    
+    
+    if (request.method =='POST'):
+        name = request.form.get('username')
+        com = request.form.get('comments')
+        
+
+        entry = Comments(
+            username=name, comments=com)
+        db.session.add(entry)
+        db.session.commit()
     return render_template('challenge1.html')
 
 

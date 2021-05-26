@@ -87,7 +87,13 @@ def login():
     else:
         return render_template('login.html')
     return render_template('login.html')
-
+@app.route('/contact')
+def contact():
+    return render_template('Contact.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+@app.route('/contac')
+def contact():
+    return "Hello world"

@@ -18,7 +18,7 @@
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
     crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="../static/css/styleI.css">
+  <link rel="stylesheet" href="../static/css/styleC.css">
 </head>
 
 <body>
@@ -57,8 +57,6 @@
             <li class="nav-item">
               <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt pr-1"></i>Login</a>
             </li>
-
-          </ul>
           </ul>
         </div>
       </div>
@@ -68,17 +66,44 @@
 
   <main>
 
-    <div class="headings">
-      <h1>CTF</h1>
-      <h3>VIT-Bhopal</h3>
-      <h4>CWC</h4>
-    </div>
-    <br>
-    <div class="main-message">
-      <p>Welcome to the CTF Page for the Cyber Warriors Club at VIT-Bhopal</p>
-      <p>ARE YOU READY?</p>
-      <p>Dive Right In!!!</p>
-      <button type="button" name="Login">Login</button>
+    <div class="fcontainer">
+      <form>
+        <div class="row">
+          <div class="col-25">
+            <label for="fname">First Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="fname" name="firstname" placeholder="Your name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="lname">Last Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="lname" name="lastname" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="email">Email-ID</label>
+          </div>
+          <div class="col-75">
+            <input type="email" id="em" name="email" placeholder="Your email-ID">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="message">Message</label>
+          </div>
+          <div class="col-75">
+            <textarea id="subject" name="subject" placeholder="Your Message" style="height:200px"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
     </div>
 
   </main>

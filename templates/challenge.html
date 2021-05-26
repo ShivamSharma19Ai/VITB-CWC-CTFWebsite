@@ -698,24 +698,311 @@
             </div>
         </div>
     </div>
+    <script>
+        function resetFilters() {
+            category = "All";
+            solved = "0";
+            difficulty = "All";
+            search = "";
+            order = "solves";
+
+            $("#category").val(category).change();
+            $("#difficulty").val(difficulty).change();
+            $("#solved").val(solved).change();
+            $("#order").val(order).change();
+            $("#search").val(search).keyup();
+
+            filterChallenges();
+        }
+        function getCookieIfExists(name) {
+            if (getCookie(name) && getCookie(name).length > 0) {
+                return getCookie(name);
+            }
+
+            return null
+        }
+
+        $('#filter-form').submit(function (event) { event.preventDefault(); });
+        var challenges = null;
+        var category = getCookieIfExists("filter-category") || "All";
+        var solved = getCookieIfExists("filter-solved") || "0";
+        var difficulty = getCookieIfExists("filter-difficulty") || "All";
+        var search = getCookieIfExists("filter-search") || "";
+        var order = getCookieIfExists("filter-order") || "solves";
+        var pageSize = parseInt(getCookieIfExists("page-size")) || 6;
+        var currentPage = 0;
+        var maxVisiblePages = 5;
+
+        var base_url = "/challenge/api/1/browse?";
+        var url = "/challenge/api/1/browse?";
+
+        if (category !== "All") {
+            url += "category=" + category + "&";
+        }
+
+        if (solved !== "-1") {
+            if (solved === "0") {
+                url += "solved=0&";
+            } else {
+                url += "solved=1&";
+            }
+        }
+
+        if (difficulty !== "All") {
+            url += "difficulty=" + difficulty + "&";
+        }
+
+        if (search !== "") {
+            url += "search=" + search + "&";
+        }
+
+        if (order) {
+            url += "order=" + order + "&";
+        }
+
+        if (pageSize) {
+            url += "page-size=" + pageSize;
+        }
+
+
+        $("#category").change(function () {
+            category = $("#category").find(":selected:not(:first-child)").text();
+            if (category) {
+                $('#category-label').addClass("active")
+            } else {
+                $('#category-label').removeClass("active")
+            }
+            filterChallenges();
+            changePage(0);
+        });
+        if (category) {
+            $("#category").val(category).change();
+        }
+
+        $("#difficulty").change(function () {
+            difficulty = $("#difficulty").find(":selected:not(:first-child)").text();
+            if (difficulty) {
+                $('#difficulty-label').addClass("active")
+            } else {
+                $('#difficulty-label').removeClass("active")
+            }
+            filterChallenges();
+            changePage(0);
+        });
+        if (difficulty) {
+            $("#difficulty").val(difficulty).change();
+        }
+        $("#solved").change(function () {
+            solved = $("#solved").find(":selected").val();
+
+            if (solved != 0) {
+                $('#solved-label').addClass("active")
+            } else {
+                $('#solved-label').removeClass("active")
+            }
+            filterChallenges();
+            changePage(0);
+        });
+        if (solved != "") {
+            $("#solved").val(solved).change();
+        }
+        $("#order").change(function () {
+            order = $("#order").find(":selected").val();
+            if (order !== $("#order").find(":selected:first-child").val()) {
+                $('#order-label').addClass("active")
+            } else {
+                $('#order-label').removeClass("active")
+            }
+            filterChallenges();
+            changePage(0);
+        });
+        if (order) {
+            $("#order").val(order).change();
+        }
+        $("#search").keyup(function () {
+            search = $("#search").val();
+            if (search) {
+                $('#search-label').addClass("active")
+            } else {
+                $('#search-label').removeClass("active")
+            }
+            filterChallenges();
+            changePage(0);
+        });
+        if (search) {
+            $("#search").val(search).keyup();
+        }
+
+        $("#pageSelect").change(function () {
+            pageSize = parseInt($("#pageSelect").find(":selected").val());
+            setCookie("page-size", pageSize, 30);
+            filterChallenges();
+        });
+        if (pageSize) {
+            $("#pageSelect").val(String(pageSize)).change();
+        }
+        $.get(url, function (res) {
+            $("#ajax_loader").show();
+            challenges = res['challenges'];
+            filterChallenges();
+        })
+            .done(function () {
+            })
+            .fail(function () {
+            })
+            .always(function () {
+                $("#ajax_loader").hide();
+                $.get(base_url, function (res) {
+                    challenges = res['challenges'];
+                    filterChallenges();
+                })
+            });
+
+        function filterChallenges() {
+            if (challenges === null) {
+                return;
+            }
+            var challengeList = $('#challenge-list');
+            challengeList.empty();
+
+            var unsorted = [];
+            challenges.forEach(function (challenge) {
+                if (shouldShowChallenge(challenge["json"])) {
+                    var containerized = '<div class="col mb-5 flex-column">' + challenge["html"] + '</div>';
+                    unsorted.push({ "html": containerized, "json": challenge["json"] });
+                }
+            });
+
+
+            challengeList.append(unsorted.sort(compareChallenges).map(function (c) {
+                return c["html"];
+            }).slice(currentPage * pageSize, (currentPage + 1) * pageSize));
+
+            setPages(unsorted.length);
+            $('#pagination').attr("hidden", false);
+            $('#pageSize').attr("hidden", false);
+            $('#pagination-overview').attr("hidden", false);
+            load_tooltip();
+
+            setCookie("filter-category", category, 30);
+            setCookie("filter-solved", solved, 30);
+            setCookie("filter-difficulty", difficulty, 30);
+            setCookie("filter-search", search, 30);
+            setCookie("filter-order", order, 30);
+        }
+
+        function paginationItemHtml(page, text) {
+            var classList = "";
+
+            if (page === currentPage && Number.isInteger(text)) {
+                classList = "active";
+            }
+
+            if (currentPage === page && !Number.isInteger(text)) {
+                classList = "disabled"
+            }
+
+            return `<li class="page-item ctf-pointer ${classList}"><a class="page-link" onclick="changePage(${page})">${text}</a></li>`
+        }
+
+        function changePage(newPage) {
+            currentPage = newPage;
+            filterChallenges();
+        }
+
+        function setPages(numChallenges) {
+            var numPages = Math.ceil(numChallenges / pageSize);
+            var pseudoMaxVis = Math.min(maxVisiblePages, numPages);
+
+            $('#current-page').text(currentPage + 1);
+            $('#num-pages').text(numPages);
+
+            var maxLeftRight = Math.floor(pseudoMaxVis / 2);
+            var previousPages = 0;
+            var nextPages = 0;
+            if (currentPage - maxLeftRight >= 0 && currentPage + maxLeftRight < numPages) {
+                previousPages = maxLeftRight;
+                nextPages = maxLeftRight;
+            } else if (currentPage - maxLeftRight < 0) {
+                previousPages = currentPage;
+                nextPages = pseudoMaxVis - previousPages;
+            } else if (currentPage + maxLeftRight >= numPages) {
+                nextPages = numPages - currentPage;
+                previousPages = pseudoMaxVis - nextPages;
+            }
+
+            var paginationItems = $('#pagination-items');
+            paginationItems.empty();
+
+            paginationItems.append(paginationItemHtml(Math.max(0, currentPage - 1), "Previous"));
+
+            var i = currentPage - previousPages;
+            var max = i + Math.min(pseudoMaxVis, nextPages + previousPages + 1);
+
+            for (i; i < max; i++) {
+                paginationItems.append(paginationItemHtml(i, i + 1));
+            }
+
+            paginationItems.append(paginationItemHtml(Math.min(numPages - 1, currentPage + 1), "Next"));
+        }
+
+        function shouldShowChallenge(chal) {
+            if (!category || chal["category"] === category) {
+                if (solved == null || chal["solved"] == solved || solved === "-1") {
+                    if (!difficulty || chal["difficulty"] === difficulty) {
+                        if (!search || chal["author"].toLowerCase().includes(search.toLowerCase()) || chal["name"].toLowerCase().includes(search.toLowerCase()) || chal["id"].toString() === search) {
+                            return true
+                        }
+                    }
+                }
+            }
+
+            return false
+        }
+
+        function compareChallenges(a, b) {
+            if (order === "solves") {
+                return b["json"]["solves"] - a["json"]["solves"]
+            }
+            else if (order === "popular") {
+                return b["json"]["rating"] - a["json"]["rating"]
+            }
+
+            else if (order === "easiest") {
+                if (a["json"]["points"] === b["json"]["points"]) {
+                    return b["json"]["solves"] - a["json"]["solves"]
+                }
+                return a["json"]["points"] - b["json"]["points"]
+            }
+
+            else if (order === "hardest") {
+                return b["json"]["points"] - a["json"]["points"]
+            }
+
+            else if (order === "newest") {
+                return b["json"]["timestamp"] - a["json"]["timestamp"]
+            }
+        }
+    </script>
+
     <footer id="footer">
         <div class="container">
-          <div class="row">
-    
-            <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1s">
-              <h2>Follow us</h2>
-              <ul class="social-icon">
-                <li id="GI"><a href="#" class="fa fa-github wow fadeIn" data-wow-delay="1s"></a></li>
-                <li><a href="#" class="fa fa-instagram wow fadeInUp" data-wow-delay="1.3s"></a></li>
-                <li><a href="#" class="fa fa-linkedin wow fadeIn" data-wow-delay="1.6s"></a></li>
-                <li><a href="#" class="fa fa-envelope wow fadeInUp" data-wow-delay="1.9s"></a></li>
-              </ul>
+            <div class="row">
+
+                <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1s">
+                    <h2>Follow us</h2>
+                    <ul class="social-icon">
+                        <li id="GI"><a href="#" class="fa fa-github wow fadeIn" data-wow-delay="1s"></a></li>
+                        <li><a href="#" class="fa fa-instagram wow fadeInUp" data-wow-delay="1.3s"></a></li>
+                        <li><a href="#" class="fa fa-linkedin wow fadeIn" data-wow-delay="1.6s"></a></li>
+                        <li><a href="#" class="fa fa-envelope wow fadeInUp" data-wow-delay="1.9s"></a></li>
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
             </div>
-    
-            <div class="clearfix"></div>
-          </div>
         </div>
-      </footer>
+    </footer>
 
 
 

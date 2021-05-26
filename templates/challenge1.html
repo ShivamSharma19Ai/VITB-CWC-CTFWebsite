@@ -199,259 +199,659 @@
                                 </div>
 
                             </div>
-                            <div id="challenge-scoreboard" class="col-md-23 card bg-secondary h-100">
-                                <div class="card-header">
-                                    <span>Top10</span>
+
+
+                            <div class="row d-flex mt-5 mb-5">
+                                <div class="col-auto">
+                                    <h3>
+                                        <i class="far fa-comments mr-2"></i>
+                                        Discussion
+                                    </h3>
+
+
+                                    <ul class="nav nav-pills mb-3" id="sortNav">
+                                        <li class="nav-item">
+                                            <a class="nav-link  ctf-pointer new" onclick="commentSort('new')"
+                                                aria-current="page">New</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active ctf-pointer popular"
+                                                onclick="commentSort('popular')">Popular</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="card-body" style="flex-direction: row; display: flex;">
+                                <div class="col-auto flex-fill">
+                                    <div class="card bg-secondary">
+                                        <div class="card-body">
+                                            <form action="/challenge/88/comment" method="post">
+                                                <div class="col-12 form-group">
+
+
+                                                    <label for="markdown">Leave a Comment (Supports Markdown)</label>
+
+
+
+
+                                                    <textarea class="form-control" id="markdown" name="markdown"
+                                                        required></textarea>
+
+
+
+                                                    <div class="form-check">
 
 
 
 
 
+                                                        <input class="form-check-input" name="protected" type="checkbox"
+                                                            value="y">
 
-                                    <div class="flex-fill ellipsis">
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">1</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/natjef20">natjef20</a>
+                                                        <label for="protected">Protect this comment</label>
 
 
 
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="0h 00m 00s"></i>
-
+                                                    </div>
+                                                    <input id="csrf_token" name="csrf_token" type="hidden"
+                                                        value="Ijg5YTNlNDc1YzFkOGU1ODQ3YWJhZThhNjM3NGQ3MDU1ZTNjOTYyZmMi.YK0EbQ.N3SU89ewKvWAECozI_kF0OySWB8">
+                                                    <button type="submit" class="btn btn-light">
+                                                        Comment
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">2</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/javier">javier</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 1d 13h 04m 01s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">3</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/drmad">drmad</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 2d 16h 00m 54s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">4</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/limyunkai19">limyunkai19</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 3d 23h 06m 27s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">5</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/sebwit20">sebwit20</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 6d 2h 17m 58s"></i>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="flex-fill ellipsis">
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">6</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/yukimo">yukimo</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 10d 22h 35m 47s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">7</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/teamaardvark">teamaardvark</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 17d 8h 47m 44s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">8</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/witchcraft">witchcraft</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 18d 1h 37m 45s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">9</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/aiyam">aiyam</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 19d 21h 51m 39s"></i>
-
-                                        </div>
-
-                                        <div class="m-1 align-items-center" style="display: flex; flex-wrap: nowrap">
-                                            <span class="text-white-50 p-1">10</span>
-
-
-
-                                            <a style="color: white; " class="ellipsis ml-2 mr-1"
-                                                href="/user/blackndoor">blackndoor</a>
-
-
-
-
-
-
-
-
-
-
-                                            <i class="far fa-clock text-white ml-2" data-toggle="tooltip"
-                                                data-placement="top" title="+ 21d 11h 06m 59s"></i>
-
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-
+                            <div class="row" id="new">
+                                <div class="col">
 
 
 
 
-                    <!-- Optional JavaScript; choose one of the two! -->
 
-                    <!-- Option 1: Bootstrap Bundle with Popper -->
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-                        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-                        crossorigin="anonymous"></script>
+                                    <div id="comment-8340" class="card ml-auto mb-3 px-4 py-3 bg-secondary"
+                                        style="width: 100%">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <div class="row d-flex">
+                                                        <div class="col-12 d-flex">
+                                                            <a class="mb-auto ml-2" href="/user/birdieparty">
+                                                                <img height="75" width="75"
+                                                                    src="https://avatar.ctflearn.com/ea8197a3520c7f6947aa145b72090005.png?set=set1&amp;size=75x75"
+                                                                    class="navbar-avatar" alt="avatar">
+                                                            </a>
+                                                            <div class="row">
+                                                                <div class="col">
+
+
+                                                                    <a style="color: white; "
+                                                                        class="font-bolder font-primary ml-3 mb-auto"
+                                                                        href="/user/birdieparty">birdieparty</a>
+
+
+
+
+
+
+
+
+
+
+                                                                    <p class="text-white-50 ml-3">1 day ago</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ml-auto font-weight-bold">
+
+
+                                                                <a onclick="$('#edit-new-8340').hide();$('#reply-new-8340').show();$('#markdown8340').focus();"
+                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                    <span>Reply<i class="fas fa-reply ml-2"></i></span>
+                                                                </a>
+                                                                <a onclick="copyTextToClipboard('https://ctflearn.com/challenge/88/8340#comment-8340');notification('Copied to clipboard', 'success', 3000)"
+                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                    <span>Share<i class="fas fa-link ml-2"></i></span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="col-11">
+                                                            <div class="ml-2 my-auto">
+
+                                                                <p>If you went through the basic SQL injections lab you
+                                                                    know
+                                                                    what to do. Look at your apostrophes closely! The
+                                                                    first and
+                                                                    last apostrophe does NOT need to be typed in your
+                                                                    answer :)
+                                                                </p>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1 ml-auto d-flex">
+                                                    <div class="d-flex flex-column my-auto ml-auto">
+                                                        <i class="fas fa-caret-up fa-2x mx-auto ctf-pointer "
+                                                            onclick="vote(8340, 1, this)"></i>
+                                                        <span class="mx-auto score">0</span>
+                                                        <i class="mx-auto fas fa-caret-down fa-2x ctf-pointer "
+                                                            onclick="vote(8340, -1, this)"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="reply-new-8340" class="row" style="display: none">
+                                                <form class="w-100" action="/challenge/88/comment" method="post">
+                                                    <div class="col-12 form-group">
+
+
+                                                        <label for="markdown">Leave a Comment (Supports
+                                                            Markdown)</label>
+
+
+
+
+                                                        <textarea class="form-control" id="markdown8340" name="markdown"
+                                                            required></textarea>
+
+
+
+                                                        <div class="form-check">
+
+
+
+
+
+                                                            <input class="form-check-input" name="protected"
+                                                                type="checkbox" value="y">
+
+                                                            <label for="protected">Protect this comment</label>
+
+
+
+                                                        </div>
+                                                        <input type="hidden" name="parent_id" value="8340">
+                                                        <input id="csrf_token" name="csrf_token" type="hidden"
+                                                            value="Ijg5YTNlNDc1YzFkOGU1ODQ3YWJhZThhNjM3NGQ3MDU1ZTNjOTYyZmMi.YK0EbQ.N3SU89ewKvWAECozI_kF0OySWB8">
+                                                        <button type="submit" class="btn btn-primary">Reply</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div id="comment-8329" class="card ml-auto mb-3 px-4 py-3 bg-secondary"
+                                        style="width: 100%">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <div class="row d-flex">
+                                                        <div class="col-12 d-flex">
+                                                            <a class="mb-auto ml-2" href="/user/alakeeme">
+                                                                <img height="75" width="75"
+                                                                    src="https://avatar.ctflearn.com/019de4e1eda5899f1217dd19d4002af6.png?set=set1&amp;size=75x75"
+                                                                    class="navbar-avatar" alt="avatar">
+                                                            </a>
+                                                            <div class="row">
+                                                                <div class="col">
+
+
+                                                                    <a style="color: white; "
+                                                                        class="font-bolder font-primary ml-3 mb-auto"
+                                                                        href="/user/alakeeme">alakeeme</a>
+
+
+
+
+
+
+
+
+
+
+                                                                    <p class="text-white-50 ml-3">2 days ago</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ml-auto font-weight-bold">
+
+
+                                                                <a onclick="$('#edit-new-8329').hide();$('#reply-new-8329').show();$('#markdown8329').focus();"
+                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                    <span>Reply<i class="fas fa-reply ml-2"></i></span>
+                                                                </a>
+                                                                <a onclick="copyTextToClipboard('https://ctflearn.com/challenge/88/8329#comment-8329');notification('Copied to clipboard', 'success', 3000)"
+                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                    <span>Share<i class="fas fa-link ml-2"></i></span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="col-11">
+                                                            <div class="ml-2 my-auto">
+
+                                                                <p>awesome! I've been doing various penetration testing
+                                                                    bur this
+                                                                    z actually my first time in vuln. hub. I did it </p>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1 ml-auto d-flex">
+                                                    <div class="d-flex flex-column my-auto ml-auto">
+                                                        <i class="fas fa-caret-up fa-2x mx-auto ctf-pointer "
+                                                            onclick="vote(8329, 1, this)"></i>
+                                                        <span class="mx-auto score">0</span>
+                                                        <i class="mx-auto fas fa-caret-down fa-2x ctf-pointer "
+                                                            onclick="vote(8329, -1, this)"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="reply-new-8329" class="row" style="display: none">
+                                                <form class="w-100" action="/challenge/88/comment" method="post">
+                                                    <div class="col-12 form-group">
+
+
+                                                        <label for="markdown">Leave a Comment (Supports
+                                                            Markdown)</label>
+
+
+
+
+                                                        <textarea class="form-control" id="markdown8329" name="markdown"
+                                                            required></textarea>
+
+
+
+                                                        <div class="form-check">
+
+
+
+
+
+                                                            <input class="form-check-input" name="protected"
+                                                                type="checkbox" value="y">
+
+                                                            <label for="protected">Protect this comment</label>
+
+                                                            <div class="row d-flex mt-5 mb-5">
+                                                                <div class="col-auto">
+                                                                    <h3>
+                                                                        <i class="far fa-comments mr-2"></i>
+                                                                        Discussion
+                                                                    </h3>
+
+
+                                                                    <ul class="nav nav-pills mb-3" id="sortNav">
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link  ctf-pointer new"
+                                                                                onclick="commentSort('new')"
+                                                                                aria-current="page">New</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link active ctf-pointer popular"
+                                                                                onclick="commentSort('popular')">Popular</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-auto flex-fill">
+                                                                    <div class="card bg-secondary">
+                                                                        <div class="card-body">
+                                                                            <form action="/challenge/88/comment"
+                                                                                method="post">
+                                                                                <div class="col-12 form-group">
+
+
+                                                                                    <label for="markdown">Leave a
+                                                                                        Comment
+                                                                                        (Supports Markdown)</label>
+
+
+
+
+                                                                                    <textarea class="form-control"
+                                                                                        id="markdown" name="markdown"
+                                                                                        required></textarea>
+
+
+
+                                                                                    <div class="form-check">
+
+
+
+
+
+                                                                                        <input class="form-check-input"
+                                                                                            name="protected"
+                                                                                            type="checkbox" value="y">
+
+                                                                                        <label for="protected">Protect
+                                                                                            this
+                                                                                            comment</label>
+
+
+
+                                                                                    </div>
+                                                                                    <input id="csrf_token"
+                                                                                        name="csrf_token" type="hidden"
+                                                                                        value="Ijg5YTNlNDc1YzFkOGU1ODQ3YWJhZThhNjM3NGQ3MDU1ZTNjOTYyZmMi.YK0EbQ.N3SU89ewKvWAECozI_kF0OySWB8">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-light">
+                                                                                        Comment
+                                                                                    </button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" id="new" hidden>
+                                                                <div class="col">
+
+
+
+
+
+                                                                    <div id="comment-8340"
+                                                                        class="card ml-auto mb-3 px-4 py-3 bg-secondary"
+                                                                        style="width: 100%">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-11">
+                                                                                    <div class="row d-flex">
+                                                                                        <div class="col-12 d-flex">
+                                                                                            <a class="mb-auto ml-2"
+                                                                                                href="/user/birdieparty">
+                                                                                                <img height="75"
+                                                                                                    width="75"
+                                                                                                    src="https://avatar.ctflearn.com/ea8197a3520c7f6947aa145b72090005.png?set=set1&amp;size=75x75"
+                                                                                                    class="navbar-avatar"
+                                                                                                    alt="avatar">
+                                                                                            </a>
+                                                                                            <div class="row">
+                                                                                                <div class="col">
+
+
+                                                                                                    <a style="color: white; "
+                                                                                                        class="font-bolder font-primary ml-3 mb-auto"
+                                                                                                        href="/user/birdieparty">birdieparty</a>
+
+
+
+
+
+
+
+
+
+
+                                                                                                    <p
+                                                                                                        class="text-white-50 ml-3">
+                                                                                                        1 day ago</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="ml-auto font-weight-bold">
+
+
+                                                                                                <a onclick="$('#edit-new-8340').hide();$('#reply-new-8340').show();$('#markdown8340').focus();"
+                                                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                                                    <span>Reply<i
+                                                                                                            class="fas fa-reply ml-2"></i></span>
+                                                                                                </a>
+                                                                                                <a onclick="copyTextToClipboard('https://ctflearn.com/challenge/88/8340#comment-8340');notification('Copied to clipboard', 'success', 3000)"
+                                                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                                                    <span>Share<i
+                                                                                                            class="fas fa-link ml-2"></i></span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mt-2">
+                                                                                        <div class="col-11">
+                                                                                            <div class="ml-2 my-auto">
+
+                                                                                                <p>If you went through
+                                                                                                    the basic
+                                                                                                    SQL injections lab
+                                                                                                    you know
+                                                                                                    what to do. Look at
+                                                                                                    your
+                                                                                                    apostrophes closely!
+                                                                                                    The
+                                                                                                    first and last
+                                                                                                    apostrophe
+                                                                                                    does NOT need to be
+                                                                                                    typed in
+                                                                                                    your answer :) </p>
+
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-1 ml-auto d-flex">
+                                                                                    <div
+                                                                                        class="d-flex flex-column my-auto ml-auto">
+                                                                                        <i class="fas fa-caret-up fa-2x mx-auto ctf-pointer "
+                                                                                            onclick="vote(8340, 1, this)"></i>
+                                                                                        <span
+                                                                                            class="mx-auto score">0</span>
+                                                                                        <i class="mx-auto fas fa-caret-down fa-2x ctf-pointer "
+                                                                                            onclick="vote(8340, -1, this)"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="reply-new-8340" class="row"
+                                                                                style="display: none">
+                                                                                <form class="w-100"
+                                                                                    action="/challenge/88/comment"
+                                                                                    method="post">
+                                                                                    <div class="col-12 form-group">
+
+
+                                                                                        <label for="markdown">Leave a
+                                                                                            Comment
+                                                                                            (Supports Markdown)</label>
+
+
+
+
+                                                                                        <textarea class="form-control"
+                                                                                            id="markdown8340"
+                                                                                            name="markdown"
+                                                                                            required></textarea>
+
+
+
+                                                                                        <div class="form-check">
+
+
+
+
+
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                name="protected"
+                                                                                                type="checkbox"
+                                                                                                value="y">
+
+                                                                                            <label
+                                                                                                for="protected">Protect
+                                                                                                this
+                                                                                                comment</label>
+
+
+
+                                                                                        </div>
+                                                                                        <input type="hidden"
+                                                                                            name="parent_id"
+                                                                                            value="8340">
+                                                                                        <input id="csrf_token"
+                                                                                            name="csrf_token"
+                                                                                            type="hidden"
+                                                                                            value="Ijg5YTNlNDc1YzFkOGU1ODQ3YWJhZThhNjM3NGQ3MDU1ZTNjOTYyZmMi.YK0EbQ.N3SU89ewKvWAECozI_kF0OySWB8">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary">Reply</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+
+                                                                    <div id="comment-8329"
+                                                                        class="card ml-auto mb-3 px-4 py-3 bg-secondary"
+                                                                        style="width: 100%">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-11">
+                                                                                    <div class="row d-flex">
+                                                                                        <div class="col-12 d-flex">
+                                                                                            <a class="mb-auto ml-2"
+                                                                                                href="/user/alakeeme">
+                                                                                                <img height="75"
+                                                                                                    width="75"
+                                                                                                    src="https://avatar.ctflearn.com/019de4e1eda5899f1217dd19d4002af6.png?set=set1&amp;size=75x75"
+                                                                                                    class="navbar-avatar"
+                                                                                                    alt="avatar">
+                                                                                            </a>
+                                                                                            <div class="row">
+                                                                                                <div class="col">
+
+
+                                                                                                    <a style="color: white; "
+                                                                                                        class="font-bolder font-primary ml-3 mb-auto"
+                                                                                                        href="/user/alakeeme">alakeeme</a>
+
+
+
+
+
+
+
+
+
+
+                                                                                                    <p
+                                                                                                        class="text-white-50 ml-3">
+                                                                                                        2 days ago</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="ml-auto font-weight-bold">
+
+
+                                                                                                <a onclick="$('#edit-new-8329').hide();$('#reply-new-8329').show();$('#markdown8329').focus();"
+                                                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                                                    <span>Reply<i
+                                                                                                            class="fas fa-reply ml-2"></i></span>
+                                                                                                </a>
+                                                                                                <a onclick="copyTextToClipboard('https://ctflearn.com/challenge/88/8329#comment-8329');notification('Copied to clipboard', 'success', 3000)"
+                                                                                                    class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                                                                    <span>Share<i
+                                                                                                            class="fas fa-link ml-2"></i></span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mt-2">
+                                                                                        <div class="col-11">
+                                                                                            <div class="ml-2 my-auto">
+
+                                                                                                <p>awesome! I've been
+                                                                                                    doing
+                                                                                                    various penetration
+                                                                                                    testing
+                                                                                                    bur this z actually
+                                                                                                    my first
+                                                                                                    time in vuln. hub. I
+                                                                                                    did it
+                                                                                                </p>
+
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-1 ml-auto d-flex">
+                                                                                    <div
+                                                                                        class="d-flex flex-column my-auto ml-auto">
+                                                                                        <i class="fas fa-caret-up fa-2x mx-auto ctf-pointer "
+                                                                                            onclick="vote(8329, 1, this)"></i>
+                                                                                        <span
+                                                                                            class="mx-auto score">0</span>
+                                                                                        <i class="mx-auto fas fa-caret-down fa-2x ctf-pointer "
+                                                                                            onclick="vote(8329, -1, this)"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="reply-new-8329" class="row"
+                                                                                style="display: none">
+                                                                                <form class="w-100"
+                                                                                    action="/challenge/88/comment"
+                                                                                    method="post">
+                                                                                    <div class="col-12 form-group">
+
+
+                                                                                        <label for="markdown">Leave a
+                                                                                            Comment
+                                                                                            (Supports Markdown)</label>
+
+
+
+
+                                                                                        <textarea class="form-control"
+                                                                                            id="markdown8329"
+                                                                                            name="markdown"
+                                                                                            required></textarea>
+
+
+
+                                                                                        <div class="form-check">
+
+
+
+
+
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                name="protected"
+                                                                                                type="checkbox"
+                                                                                                value="y">
+
+                                                                                            <label
+                                                                                                for="protected">Protect
+                                                                                                this
+                                                                                                comment</label>
+
+
+
+
+
+
+
+
+                                                                                            <!-- Optional JavaScript; choose one of the two! -->
+
+                                                                                            <!-- Option 1: Bootstrap Bundle with Popper -->
+                                                                                            <script
+                                                                                                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+                                                                                                integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+                                                                                                crossorigin="anonymous"></script>
 
 </body>
 
